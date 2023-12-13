@@ -1,0 +1,36 @@
+float factor = 0.1;
+int nob = 100;
+int norb = 10;
+int blerg = 10;
+ArrayList <Buuble> buubArrayList;
+int flib = 0;
+
+// al.get(i)
+// al.set(i, x)
+// al.remove(i)
+// al.add(x)
+
+void setup() {
+  size (600, 700);
+  buubArrayList = new ArrayList<Buuble>();
+}
+
+void draw() {
+  background(255);
+  textSize(20);
+  stroke(145);
+  text("nub Buubles " +buubArrayList.size(), 40, 30);
+  for ( int  i = 0; i<buubArrayList.size(); i++) {
+    buubArrayList.get(i).show();
+    buubArrayList.get(i).move();
+    buubArrayList.get(i).compBuub(i);
+  }
+  line(flib, height/4, width, height/4);
+}
+
+void mousePressed() {
+  for (int i = 0; i<10; i++){
+  Buuble aBuuble = new Buuble((int) (Math.random()* width), (int) (Math.random()* height*0.75)+height/4);
+  buubArrayList.add(aBuuble);
+  }
+}
