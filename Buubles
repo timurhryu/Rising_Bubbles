@@ -34,3 +34,63 @@ void mousePressed() {
   buubArrayList.add(aBuuble);
   }
 }
+
+
+class Buuble {
+  float r, g, b;
+  float x, y;
+  float sz, sp;
+  boolean boing;
+
+  Buuble() {
+    r = (float) (Math.random()*256);
+    g = (float) (Math.random()*256);
+    b = (float) (Math.random()*256);
+    y = height+20;
+    x = (float) (Math.random()*width);
+    sz = (float) (Math.random()*30)+5;
+    sp = sz * factor;
+  }
+  Buuble(float r_, float g_, float b_) {
+    this();
+    r = r_;
+    g = g_;
+    b = b_;
+  }
+
+  Buuble(float x_, float y_) {
+    this();
+    x = x_;
+    y = y_;
+  }
+  void move() {
+    x += (int) (Math.random()*5) -2;
+    if ( r>140 && g<110 && b<110 || y - sz/2 > height/4) {
+      y -=sp;
+    }
+    if( y + sz/2 <= 0){
+      y=height + sz/2 ;
+    }
+  }
+
+
+
+  void show() {
+    fill( r, g, b);
+    ellipse(x, y, sz, sz);
+  }
+  //collisison
+  void compBuub(int index) {
+    for (int i=index+1; i< buubArrayList.size(); i++) {
+      float aDist = dist(x, y, buubArrayList.get(i).x, buubArrayList.get(i).y);
+      if (aDist <= sz/2+buubArrayList.get(i).sz/2) {
+        buubArrayList.remove(i);
+        buubArrayList.remove(index);
+      }
+    }
+    if (x - sz/2 <= 0 || x + sz/2 >= width) {
+        buubArrayList.remove(index);
+      }
+      
+  }
+}
